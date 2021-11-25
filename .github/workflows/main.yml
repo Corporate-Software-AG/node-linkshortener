@@ -36,9 +36,7 @@ jobs:
             registry-username: ${{ SECRETS.REGISTRY_USERNAME }}
             registry-password: ${{ SECRETS.REGISTRY_PASSWORD }}
             location: switzerlandnorth
-            env:
-              APP_ID: ${{ SECRETS.APP_ID }}
-              APP_SECRET: ${{ SECRETS.APP_SECRET }}
-              TENANT_ID: ${{ SECRETS.TENANT_ID }}
-              SITE_ID: ${{ SECRETS.SITE_ID }}
-              LIST_ID: ${{ SECRETS.LIST_ID }}
+            environment-variables: APP_ID=${{ SECRETS.APP_ID }} TENANT_ID=${{ SECRETS.TENANT_ID }}
+            secure-environment-variables: APP_SECRET=${{ SECRETS.APP_SECRET }} SITE_ID=${{ SECRETS.SITE_ID }} LIST_ID=${{ SECRETS.LIST_ID }}
+              
+              
