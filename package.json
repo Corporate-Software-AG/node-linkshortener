@@ -1,0 +1,25 @@
+{
+  "name": "linkshortener",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Jublaost/node-linkshortener.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Jublaost/node-linkshortener/issues"
+  },
+  "homepage": "https://github.com/Jublaost/node-linkshortener#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "azure-storage": "^2.10.5",
+    "express": "^4.17.1",
+    "qs": "^6.10.1"
+  }
+}
