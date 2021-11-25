@@ -1,0 +1,32 @@
+html
+  head
+    script(src='https://unpkg.com/qr-code-styling/lib/qr-code-styling.js')
+    title= title
+  body
+    div(id="container")
+      div(id="qr")
+      h1(id="url")= message
+
+
+script.
+  console.log("hi")
+  let url = document.getElementById("url").innerHTML
+  const qrCode = new QRCodeStyling({
+    width: 400,
+    height: 400,
+    data: url,
+    image: "https://jublaostlinkshortener.blob.core.windows.net/images/jubla-logo.png",
+    dotsOptions: {
+      color: "#283583",
+      type: "dots"
+    },
+    backgroundOptions: {
+      color: "#FFFFFF",
+    }
+  });
+  qrCode.append(document.getElementById("qr"));
+style.
+  #container{
+    font-family: "Century Gothic W01",Arial;
+    text-align: center;
+  } 

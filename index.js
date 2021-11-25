@@ -1,8 +1,9 @@
 const express = require('express')
 const app = express()
-const port = process.env.PORT || 80;
+const port = process.env.PORT || 8080;
 const axios = require('axios');
 const qs = require('qs');
+const path = require('path');
 
 const APP_ID = process.env["APP_ID"];
 const APP_SECRET = process.env["APP_SECRET"];
@@ -16,15 +17,21 @@ const MS_GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/';
 
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
-app.get('/', (req, res) => {
-  res.send('Hello World!')
-})
+app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
+
 
 app.get('/:id', async (req, res) => {
   let token = await getToken();
-  let link = await getLink(token, req.params.id);
-  console.log('Redirect to: ' + link);
+  let linkInfo = await getLinkInfo(token, req.params.id);
+  console.log('Redirect to: ' + linkInfo.fields.Link);
   res.redirect(link)
+})
+
+app.get('/qr/:shortlink', async (req, res) => {
+  let token = await getToken();
+  let linkInfo = await getLinkInfo(token, req.params.shortlink);
+  res.render("qr", { title: linkInfo.fields.Title, message: linkInfo.fields.Link });
 })
 
 app.listen(port, () => {
@@ -57,14 +64,14 @@ let getToken = async () => {
  * @param query short name
  * @returns Full destination Link
  */
-let getLink = async (token, query) => {
+let getLinkInfo = async (token, query) => {
   return await axios.get(MS_GRAPH_ENDPOINT + "sites/" + SITE_ID + "/lists/" + LIST_ID + "/items?expand=fields(select=Title,Link)&$filter=startswith(fields/Title, '"+ query +"')&$select=id,fields", {
-    headers: {
+      headers: {
       'Authorization': 'Bearer ' + token
     }
   })
   .then((response) => {
-    return response.data.value[0].fields.Link;
+    return response.data.value[0];
   })
   .catch((error) => {
     console.log(error);
