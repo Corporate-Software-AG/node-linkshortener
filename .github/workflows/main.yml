@@ -30,7 +30,7 @@ jobs:
             resource-group: link-shortener
             name: node-linkshortener
             image: jublaost.azurecr.io/node-linkshortener:${{ github.sha }}
-            ports: 80 8080
+            ports: 80
             dns-name-label: node-linkshortener
             registry-login-server: jublaost.azurecr.io
             registry-username: ${{ SECRETS.REGISTRY_USERNAME }}
