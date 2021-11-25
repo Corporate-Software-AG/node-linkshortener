@@ -27,7 +27,7 @@ jobs:
         - name: 'Deploy to Azure Container Instances'
           uses: azure/aci-deploy@v1
           with:
-            resource-group: link-shortene
+            resource-group: link-shortener
             name: node-linkshortener
             image: jublaost.azurecr.io/node-linkshortener:${{ github.sha }}
             ports: 80 8080
