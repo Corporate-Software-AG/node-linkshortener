@@ -51,6 +51,12 @@ let getToken = async () => {
       });
 }
 
+/**
+ * 
+ * @param token 
+ * @param query short name
+ * @returns Full destination Link
+ */
 let getLink = async (token, query) => {
   return await axios.get(MS_GRAPH_ENDPOINT + "sites/" + SITE_ID + "/lists/" + LIST_ID + "/items?expand=fields(select=Title,Link)&$filter=startswith(fields/Title, '"+ query +"')&$select=id,fields", {
     headers: {
