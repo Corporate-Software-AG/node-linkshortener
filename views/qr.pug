@@ -5,11 +5,11 @@ html
   body
     div(id="container")
       div(id="qr")
-      h1(id="url")= message
+      h1(id="url") 
+        a(href=link)= link
 
 
 script.
-  console.log("hi")
   let url = document.getElementById("url").innerHTML
   const qrCode = new QRCodeStyling({
     width: 400,

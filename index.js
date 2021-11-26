@@ -19,25 +19,50 @@ axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
+app.use('/favicon.ico', express.static('favicon.ico'));
 
+app.get('/', (req, res) => {
+  res.send('Hello Linkshortener');
+})
 
 app.get('/:id', async (req, res) => {
   let token = await getToken();
   let linkInfo = await getLinkInfo(token, req.params.id);
+  if (linkInfo == undefined) {
+    res.sendStatus(404);
+    res.send('Dieser Link wurde nicht gefunden.')
+  }
   console.log('Redirect to: ' + linkInfo.fields.Link);
   res.redirect(linkInfo.fields.Link)
 })
 
-app.get('/qr/:shortlink', async (req, res) => {
+app.get('/:id/qr', async (req, res) => {
   let token = await getToken();
-  let linkInfo = await getLinkInfo(token, req.params.shortlink);
-  res.render("qr", { title: linkInfo.fields.Title, message: linkInfo.fields.Link });
+  let linkInfo = await getLinkInfo(token, req.params.id);
+  if (linkInfo == undefined) {
+    res.sendStatus(404);
+    res.send('Dieser Link wurde nicht gefunden.')
+  }
+  res.render("qr", { title: linkInfo.fields.Title, link: linkInfo.fields.Shortlink });
 })
 
 app.listen(port, () => {
   console.log(`This app is listening at http://localhost:${port}`)
+  if (isConfig()) {
+    console.log(`Configuration Complete!`)
+  }
 })
-
+/**
+ * Check if Config is complete
+ * @returns boolen
+ */
+let isConfig = () => {
+  if (!APP_ID || !APP_SECRET || !TENANT_ID || !LIST_ID || !SITE_ID) {
+    console.log('Configuration incomplete')
+    process.exit();
+  }
+  return true;
+}
 /**
  * Get Token for MS Graph
  */
@@ -65,13 +90,19 @@ let getToken = async () => {
  * @returns Full destination Link
  */
 let getLinkInfo = async (token, query) => {
-  return await axios.get(MS_GRAPH_ENDPOINT + "sites/" + SITE_ID + "/lists/" + LIST_ID + "/items?expand=fields(select=Title,Link)&$filter=startswith(fields/Title, '"+ query +"')&$select=id,fields", {
+  return await axios.get(MS_GRAPH_ENDPOINT + "sites/" + SITE_ID + "/lists/" + LIST_ID + "/items?expand=fields(select=Title,Link,Shortlink)&$filter=startswith(fields/Title, '"+ query +"')&$select=id,fields", {
       headers: {
       'Authorization': 'Bearer ' + token
     }
   })
-  .then((response) => {
-    return response.data.value[0];
+  .then(response => {
+    if (response.data.value.length > 0 && response.data.value != undefined) {
+      return response.data.value[0];
+    } else {
+      console.log('query: ', query)
+      console.log('response: ', response)
+      throw new Error('Link nicht gefunden')
+    }
   })
   .catch((error) => {
     console.log(error);
