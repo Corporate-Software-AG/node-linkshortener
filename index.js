@@ -25,7 +25,7 @@ app.get('/:id', async (req, res) => {
   let token = await getToken();
   let linkInfo = await getLinkInfo(token, req.params.id);
   console.log('Redirect to: ' + linkInfo.fields.Link);
-  res.redirect(link)
+  res.redirect(linkInfo.fields.Link)
 })
 
 app.get('/qr/:shortlink', async (req, res) => {
