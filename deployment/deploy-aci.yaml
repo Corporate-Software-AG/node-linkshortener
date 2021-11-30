@@ -53,7 +53,7 @@ properties:
       - port: 443
         protocol: TCP
     type: Public
-    dnsNameLabel: link-shortener-jublaost
+    dnsNameLabel: link-shortener-jublaost-2
   osType: Linux
 tags: null
 type: Microsoft.ContainerInstance/containerGroups
