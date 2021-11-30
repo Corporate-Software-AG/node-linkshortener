@@ -31,10 +31,6 @@ jobs:
           with:
             creds: ${{ SECRETS.AZURE_CREDENTIALS }}
 
-        - name: Azure CLI script
-          uses: azure/CLI@v1
-          with:
-            azcliversion: 2.0.72
-            inlineScript: |
-              az account set --subscription ${{ SECRETS.SUBSCRIPTION_ID }}
-              az container create --resource-group link-shortener --file deployment/deploy-aci.yaml
+        - run: |
+            az account set --subscription ${{ SECRETS.SUBSCRIPTION_ID }}
+            az container create --resource-group link-shortener --file deployment/deploy-aci.yaml
