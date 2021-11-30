@@ -36,4 +36,5 @@ jobs:
           with:
             azcliversion: 2.0.72
             inlineScript: |
+              az account set --subscription ${{ SECRETS.SUBSCRIPTION_ID }}
               az container create --resource-group link-shortener --file deployment/deploy-aci.yaml
