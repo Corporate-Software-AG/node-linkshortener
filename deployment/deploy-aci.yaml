@@ -15,15 +15,15 @@ properties:
             memoryInGB: 0.5
         environmentVariables:
           - name: APP_ID
-            value: ${{ SECRETS.APP_ID }} 
+            value: ${{ env.APP_ID }} 
           - name: TENANT_ID
-            value: ${{ SECRETS.TENANT_ID }}
+            value: ${{ env.TENANT_ID }}
           - name: APP_SECRET
-            value: ${{ SECRETS.APP_SECRET }}
+            value: ${{ env.APP_SECRET }}
           - name: SITE_ID
-            value: ${{ SECRETS.SITE_ID }}
+            value: ${{ env.SITE_ID }}
           - name: LIST_ID
-            value: ${{ SECRETS.LIST_ID }}
+            value: ${{ env.LIST_ID }}
            
     - name: caddy
       properties:
