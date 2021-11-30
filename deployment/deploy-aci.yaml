@@ -5,7 +5,7 @@ properties:
   containers:
     - name: link-shortener
       properties:
-        image: jublaost.azurecr.io/node-linkshortener:${{ github.sha }}
+        image: jublaost.azurecr.io/node-linkshortener:${{ env.SHA }}
         ports:
           - port: 8080
             protocol: TCP

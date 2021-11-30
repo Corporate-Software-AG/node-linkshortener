@@ -10,6 +10,7 @@ jobs:
           APP_SECRET: ${{ SECRETS.APP_SECRET }}
           SITE_ID: ${{ SECRETS.SITE_ID }}
           LIST_ID: ${{ SECRETS.LIST_ID }}
+          SHA: ${{ github.sha }}
 
         steps:
         - name: 'Checkout GitHub Action'
