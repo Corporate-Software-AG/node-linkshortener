@@ -2,10 +2,14 @@ api-version: 2021-03-01
 location: switzerlandnorth
 name: link-shortener-test-2
 properties:
+  imageRegistryCredentials:
+    - server: jublaost.azurecr.io
+      username: jublaost
+      password: ${{ env.REGISTRY_PASSWORD }} 
   containers:
     - name: link-shortener
       properties:
-        image: jublaost.azurecr.io/node-linkshortener:${{ env.SHA }}
+        image: jublaost.azurecr.io/node-linkshortener:latest
         ports:
           - port: 8080
             protocol: TCP
