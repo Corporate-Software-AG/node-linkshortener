@@ -1,3 +1,5 @@
+deployment/secrets-*
+
 # Logs
 logs
 *.log

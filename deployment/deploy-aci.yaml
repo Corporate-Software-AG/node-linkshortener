@@ -3,13 +3,13 @@ location: switzerlandnorth
 name: link-shortener
 properties:
   imageRegistryCredentials:
-    - server: jublaost.azurecr.io
-      username: jublaost
-      password: xxx
+    - server: << VALUE >>.azurecr.io
+      username: << VALUE >>
+      password: << password >>
   containers:
     - name: link-shortener
       properties:
-        image: jublaost.azurecr.io/node-linkshortener:dh6
+        image: << VALUE >>.azurecr.io/node-linkshortener:<< tag >>
         ports:
           - port: 8080
             protocol: TCP
@@ -19,15 +19,15 @@ properties:
             memoryInGB: 0.5
         environmentVariables:
           - name: APP_ID
-            value: xxx
+            value: << VALUE >>
           - name: APP_SECRET
-            value: xxx
+            value: << VALUE >>
           - name: TENANT_ID
-            value: xxx
+            value: << VALUE >>
           - name: SITE_ID
-            value: jublaost.sharepoint.com,xxx,xxx
+            value: << VALUE >>.sharepoint.com,<< VALUE >>,<< VALUE >>
           - name: LIST_ID
-            value: xxx
+            value: << VALUE >>
            
     - name: caddy
       properties:
@@ -37,7 +37,7 @@ properties:
             'caddy',
             'reverse-proxy',
             '--from',
-            'link.jublaost.ch',
+            '<< URL >>',
             '--to',
             'localhost:8080',
           ]
@@ -57,7 +57,7 @@ properties:
       - port: 443
         protocol: TCP
     type: Public
-    dnsNameLabel: link-shortener-jublaost
+    dnsNameLabel: << VALUE >>
   osType: Linux
 tags: null
 type: Microsoft.ContainerInstance/containerGroups

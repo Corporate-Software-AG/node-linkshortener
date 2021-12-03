@@ -1,0 +1,9 @@
+export APP_ID=<< VALUE >>
+export APP_SECRET=<< VALUE >>
+export TENANT_ID=<< VALUE >>
+export SITE_ID=<< VALUE >>.sharepoint.com,<< VALUE >>,<< VALUE >>
+export LIST_ID=<< VALUE >>
+
+export QR_IMAGE_URL="https://<< VALUE >>.blob.core.windows.net/images/<< VALUE >>.png"
+export QR_COLORCODE="#fff"
+export QR_BACKCOLOR="#000"

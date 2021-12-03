@@ -22,7 +22,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use('/favicon.ico', express.static('favicon.ico'));
 
 app.get('/', (req, res) => {
-  res.send('Hello Linkshortener');
+  res.send('Linkshortener up and running');
 })
 
 app.get('/:id', async (req, res) => {
@@ -32,8 +32,8 @@ app.get('/:id', async (req, res) => {
     res.sendStatus(404);
     res.send('Dieser Link wurde nicht gefunden.')
   }
-  console.log('Redirect to: ' + linkInfo.fields.Link);
-  res.redirect(linkInfo.fields.Link)
+  console.log('Redirect to: ' + linkInfo.fields.Link.trim());
+  res.redirect(linkInfo.fields.Link.trim())
 })
 
 app.get('/:id/qr', async (req, res) => {
@@ -43,7 +43,12 @@ app.get('/:id/qr', async (req, res) => {
     res.sendStatus(404);
     res.send('Dieser Link wurde nicht gefunden.')
   }
-  res.render("qr", { title: linkInfo.fields.Title, link: linkInfo.fields.Shortlink });
+
+  let qr_image_url = process.env["QR_IMAGE_URL"] || '';
+  let qr_colorcode = process.env["QR_COLORCODE"] || '#000';
+  let qr_backcolor = process.env["QR_BACKCOLOR"] || '#fff';
+
+  res.render("qr", { title: linkInfo.fields.Title, link: linkInfo.fields.Shortlink, image: qr_image_url, color: qr_colorcode, backgroundColor: qr_backcolor });
 })
 
 app.listen(port, () => {
