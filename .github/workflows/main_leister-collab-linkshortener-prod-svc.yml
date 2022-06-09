@@ -50,6 +50,6 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'Leister-Collab-Linkshortener-Prod-Svc'
-          slot-name: 'Production'
+          slot-name: 'axetris'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_D59CE9BB36CD41988D07CCD557E334D1 }}
           package: .
