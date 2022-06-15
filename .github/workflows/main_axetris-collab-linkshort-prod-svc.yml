@@ -6,7 +6,7 @@ name: Build and deploy Node.js app to Azure Web App - Axetris-Collab-LinkShort-P
 on:
   push:
     branches:
-      - main
+      - customer-l
   workflow_dispatch:
 
 jobs:
