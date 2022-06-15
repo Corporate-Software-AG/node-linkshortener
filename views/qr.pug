@@ -5,6 +5,7 @@ html
   body
     div(id="container")
       div(id="qr")
+      div(id="qr2")
       h1(id="url") 
         a(href=link)= link
     p(id="id_image")= image 
@@ -18,13 +19,24 @@ script.
   let color = document.getElementById("id_color").innerHTML
   let backgroundColor = document.getElementById("id_backgroundColor").innerHTML
   const qrCode = new QRCodeStyling({
+    width: 1280,
+    height: 1280,
+    data: url,
+    image: image,
+    dotsOptions: {
+      color: color,
+    },
+    backgroundOptions: {
+      color: backgroundColor,
+    }
+  });
+  const qrCode2 = new QRCodeStyling({
     width: 400,
     height: 400,
     data: url,
     image: image,
     dotsOptions: {
       color: color,
-      type: "rounded"
     },
     backgroundOptions: {
       color: backgroundColor,
