@@ -4,10 +4,8 @@
 name: Build and deploy Node.js app to Azure Web App - Leister-Collab-LinkShort-Prod-Svc
 
 on:
-  push:
-    branches:
-      - main
   workflow_dispatch:
+
 
 jobs:
   build:
