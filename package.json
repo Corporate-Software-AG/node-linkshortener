@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Jublaost/node-linkshortener#readme",
   "dependencies": {
+    "applicationinsights": "^2.3.3",
     "axios": "^0.24.0",
     "azure-storage": "^2.10.5",
     "cors": "^2.8.5",
