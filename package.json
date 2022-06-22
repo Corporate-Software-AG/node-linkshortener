@@ -8,14 +8,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Jublaost/node-linkshortener.git"
+    "url": "git+https://github.com/Corporate-Software-AG/node-linkshortener.git"
   },
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/Jublaost/node-linkshortener/issues"
+    "url": "https://github.com/Corporate-Software-AG/node-linkshortener/issues"
   },
-  "homepage": "https://github.com/Jublaost/node-linkshortener#readme",
+  "homepage": "https://github.com/Corporate-Software-AG/node-linkshortener#readme",
   "dependencies": {
     "applicationinsights": "^2.3.3",
     "axios": "^0.24.0",
