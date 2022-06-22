@@ -25,7 +25,7 @@ app.set("views", path.join(__dirname, "views"));
 app.use('/favicon.ico', express.static('favicon.ico'));
 
 app.get('/', (req, res) => {
-  res.send('Linkshortener up and running');
+  res.sendStatus(404);
 })
 
 app.get('/:id', async (req, res) => {
