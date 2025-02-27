@@ -17,7 +17,7 @@ const MS_GRAPH_SCOPE = 'https://graph.microsoft.com/.default';
 const MS_GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/';
 
 appInsights.setup().start();
-axios.default.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
