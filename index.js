@@ -16,9 +16,8 @@ const TOKEN_ENDPOINT = 'https://login.microsoftonline.com/' + TENANT_ID + '/oaut
 const MS_GRAPH_SCOPE = 'https://graph.microsoft.com/.default';
 const MS_GRAPH_ENDPOINT = 'https://graph.microsoft.com/v1.0/';
 
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
-
 appInsights.setup().start();
+axios.default.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
@@ -32,8 +31,7 @@ app.get('/:id', async (req, res) => {
   let token = await getToken();
   let linkInfo = await getLinkInfo(token, req.params.id);
   if (linkInfo == undefined) {
-    res.sendStatus(404);
-    res.send('Dieser Link wurde nicht gefunden.')
+    return res.status(404).send('Dieser Link wurde nicht gefunden.')
   }
   console.log('Redirect to: ' + linkInfo.fields.Link.trim());
   res.redirect(linkInfo.fields.Link.trim())
