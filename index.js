@@ -43,8 +43,7 @@ app.get('/:id/qr', async (req, res) => {
   let token = await getToken();
   let linkInfo = await getLinkInfo(token, req.params.id);
   if (linkInfo == undefined) {
-    res.sendStatus(404);
-    res.send('Dieser Link wurde nicht gefunden.')
+    return res.status(404).send('Dieser Link wurde nicht gefunden.');
   }
 
   let qr_image_url = process.env["QR_IMAGE_URL"] || '';
