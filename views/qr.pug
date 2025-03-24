@@ -4,32 +4,28 @@ html
     title= title
   body
     div(id="container")
-      div(id="qr")
       h1(id="url")= link
-    p(id="id_image")= image 
+      br
+      div(id="qr2")
+      br
+      div(id="qr")
     p(id="id_color")= color 
     p(id="id_backgroundColor")= backgroundColor 
 
-
 script.
   let url = document.getElementById("url").innerHTML
-  let image = document.getElementById("id_image").innerHTML
-  let color = document.getElementById("id_color").innerHTML
-  let backgroundColor = document.getElementById("id_backgroundColor").innerHTML
   const qrCode = new QRCodeStyling({
-    width: 400,
-    height: 400,
-    data: url,
-    image: image,
-    dotsOptions: {
-      color: color,
-      type: "rounded"
-    },
-    backgroundOptions: {
-      color: backgroundColor,
-    }
+    width: 1280,
+    height: 1280,
+    data: url
   });
   qrCode.append(document.getElementById("qr"));
+  const qrCode2 = new QRCodeStyling({
+    width: 400,
+    height: 400,
+    data: url
+  });
+  qrCode2.append(document.getElementById("qr2"));
 style.
   #container{
     font-family: "Century Gothic W01",Arial;
